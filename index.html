@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NEURON ? Prompt Checker</title>
+<title>NEURON вЂ” Prompt Checker</title>
+<meta name="description" content="Free browser-based AI prompt checker: assess and improve prompts in nine languages. No sign-in or AI API required.">
+<link rel="canonical" href="https://aleksknyaz1968-rgb.github.io/neuron-prompt-checker/">
+<meta property="og:title" content="NEURON вЂ” Free Prompt Checker">
+<meta property="og:description" content="Improve AI prompts for free in nine languages, directly in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aleksknyaz1968-rgb.github.io/neuron-prompt-checker/">
 <style>
 
 :root {
@@ -326,6 +332,28 @@ footer a{text-decoration:none;border-bottom:1px solid #677baa}
 }
 [dir="rtl"] #languageVisible {direction:ltr;text-align:left}
 
+/* NEURON Russian community invitation */
+.telegram-cta{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:22px;margin:0 0 24px;padding:20px 23px;
+ background:linear-gradient(105deg,rgba(82,110,238,.17),rgba(122,85,211,.10));
+ border:1px solid rgba(151,165,255,.35);border-radius:18px;
+}
+.telegram-cta__text{min-width:0;flex:1}
+.telegram-cta h2{margin:0 0 7px;color:#f5f6ff;font-size:19px;line-height:1.3}
+.telegram-cta p{margin:0;color:#c9d3f0;font-size:14px;line-height:1.6}
+.telegram-cta__link{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:46px;padding:11px 17px;border-radius:12px;
+ color:#fff;background:#536bef;font-size:14px;font-weight:750;
+ text-decoration:none;text-align:center;white-space:nowrap;
+}
+.telegram-cta__link:hover{background:#6a7fff}
+.telegram-cta.hidden{display:none!important}
+@media(max-width:650px){
+ .telegram-cta{flex-direction:column;align-items:stretch;padding:18px}
+ .telegram-cta__link{white-space:normal}
+}
 </style>
 </head>
 <body>
@@ -350,6 +378,13 @@ footer a{text-decoration:none;border-bottom:1px solid #677baa}
 </header>
 <div class="eyebrow">AI PROMPT STUDIO</div>
 <p id="subtitle"></p>
+<section id="telegramCta" class="telegram-cta hidden" aria-labelledby="telegramCtaTitle">
+ <div class="telegram-cta__text">
+  <h2 id="telegramCtaTitle">Р‘РѕР»СЊС€Рµ РїРѕР»РµР·РЅС‹С… РїСЂРѕРјРїС‚РѕРІ вЂ” РІ РєР°РЅР°Р»Рµ РќР•Р™Р РћРќ</h2>
+  <p>РџСЂРёРјРµСЂС‹ Р·Р°РїСЂРѕСЃРѕРІ Рє РР, РїСЂР°РєС‚РёС‡РµСЃРєРёРµ РёРґРµРё Рё РЅРѕРІРѕСЃС‚Рё РїСЂРѕРµРєС‚Р°. Р СѓСЃСЃРєРѕСЏР·С‹С‡РЅС‹Р№ Telegram-РєР°РЅР°Р».</p>
+ </div>
+ <a class="telegram-cta__link" href="https://t.me/neuron_ai_lab" target="_blank" rel="noopener noreferrer">РћС‚РєСЂС‹С‚СЊ РєР°РЅР°Р» Рё РїРѕРґРїРёСЃР°С‚СЊСЃСЏ</a>
+</section>
 
 <section class="panel">
 <label id="promptLabel" for="prompt"></label>
@@ -428,6 +463,7 @@ function setLanguage(code){
  document.title = d.title;
 
  $('subtitle').textContent = d.subtitle;
+ $('telegramCta').classList.toggle('hidden', code !== 'ru');
  $('promptLabel').textContent = d.prompt;
  $('audienceLabel').textContent = d.audience;
  $('styleLabel').textContent = d.style;
@@ -522,7 +558,8 @@ $('copy').addEventListener('click', async()=>{
  }
 });
 
-setLanguage('en');
+const requestedLanguage = new URLSearchParams(window.location.search).get('lang');
+setLanguage(requestedLanguage && I18N[requestedLanguage] ? requestedLanguage : 'en');
 </script>
 </body>
 </html>
